@@ -29,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // Color de fondo
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -47,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
               width: MediaQuery.of(context).size.width * 0.9,
               padding: EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: Colors.blueGrey[900], // Fondo oscuro
+                color: Colors.blueGrey[900],
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Column(
@@ -55,26 +55,32 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   SizedBox(height: 10),
 
-                  // Campos de texto con fondo claro
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white, // Fondo claro
-                      borderRadius: BorderRadius.circular(10),
+                  // Campos de texto
+                  SizedBox(
+                    height: 50,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: TextInput(label: "Correo", controller: emailController),
                     ),
-                    child: TextInput(label: "Correo", controller: emailController),
                   ),
-                  SizedBox(height: 15),
+                  SizedBox(height: 12),
 
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white, // Fondo claro
-                      borderRadius: BorderRadius.circular(10),
+                  SizedBox(
+                    height: 50,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: TextInput(label: "Contraseña", controller: passwordController, isPassword: true),
                     ),
-                    child: TextInput(label: "Contraseña", controller: passwordController, isPassword: true),
                   ),
                   SizedBox(height: 25),
 
-                  // Botón de "Iniciar sesión"
+                  // Botón de "Iniciar sesión" 
                   SizedBox(
                     width: double.infinity,
                     height: 55,
