@@ -47,19 +47,107 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          TextInput(label: "Correo", controller: emailController),
-          TextInput(label: "Confirmar correo", controller: confirmEmailController),
-          TextInput(label: "Contraseña", controller: passwordController, isPassword: true),
-          TextInput(label: "Confirmar contraseña", controller: confirmPasswordController, isPassword: true),
-          ElevatedButton(
-            onPressed: register,
-            child: Text("Registrarse"),
-          ),
-        ],
+      backgroundColor: Colors.white, // Fondo blanco
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Logo
+            Image.asset(
+              'assets/logo.png',
+              height: 100,
+            ),
+
+            SizedBox(height: 40),
+
+            // Contenedor del formulario
+            Container(
+              width: MediaQuery.of(context).size.width * 0.9,
+              padding: EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.blueGrey[900], // Fondo oscuro
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(height: 10),
+
+                  // Campos de texto
+                  SizedBox(
+                    height: 50,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white, // Fondo claro
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: TextInput(label: "Correo", controller: emailController),
+                    ),
+                  ),
+                  SizedBox(height: 12),
+
+                  SizedBox(
+                    height: 50,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white, // Fondo claro
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: TextInput(label: "Confirmar correo", controller: confirmEmailController),
+                    ),
+                  ),
+                  SizedBox(height: 12),
+
+                  SizedBox(
+                    height: 50,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white, // Fondo claro
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: TextInput(label: "Contraseña", controller: passwordController, isPassword: true),
+                    ),
+                  ),
+                  SizedBox(height: 12),
+
+                  SizedBox(
+                    height: 50,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: TextInput(label: "Confirmar contraseña", controller: confirmPasswordController, isPassword: true),
+                    ),
+                  ),
+                  SizedBox(height: 25),
+
+                  // Botón de "Registrarse"
+                  SizedBox(
+                    width: double.infinity,
+                    height: 55,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.lightBlue[100], // Color del botón
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      onPressed: register,
+                      child: Text(
+                        "Registrarse",
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 15),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 }
+
