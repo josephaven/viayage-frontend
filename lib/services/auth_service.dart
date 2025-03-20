@@ -14,13 +14,16 @@ class AuthService {
       body: jsonEncode({"email": email, "password": password}),
     );
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 201) {
       var data = jsonDecode(response.body);
-      await _storage.write(key: "token", value: data["access_token"]);
+      await FlutterSecureStorage().write(key: "token", value: data["access_token"]); // Guardar token
       return true;
     }
+
     return false;
   }
+
+
 
   // Método para registrarse
   static Future<bool> register(String email, String password) async {

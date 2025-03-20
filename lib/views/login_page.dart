@@ -12,13 +12,16 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController passwordController = TextEditingController();
 
   void login() async {
-    String email = emailController.text;
-    String password = passwordController.text;
+    print("✏ Email ingresado: ${emailController.text}");
+    print("🔒 Contraseña ingresada: ${passwordController.text}");
+
+    String email = emailController.text.trim(); // Eliminar espacios en blanco
+    String password = passwordController.text.trim(); // Eliminar espacios en blanco
 
     bool success = await AuthService.login(email, password);
 
     if (success) {
-      Navigator.pushReplacementNamed(context, "/home");
+      Navigator.pushReplacementNamed(context, "/home"); // Redirigir a la pantalla principal
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Credenciales incorrectas")),

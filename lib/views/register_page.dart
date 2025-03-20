@@ -36,13 +36,17 @@ class _RegisterPageState extends State<RegisterPage> {
     bool success = await AuthService.register(email, password);
 
     if (success) {
-      Navigator.pop(context);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Registro exitoso. Ahora puedes iniciar sesión.")),
+      );
+      Navigator.pop(context); // Volver a la pantalla de login
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Error al registrarse")),
       );
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
