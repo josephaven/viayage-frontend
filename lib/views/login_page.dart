@@ -18,13 +18,14 @@ class _LoginPageState extends State<LoginPage> {
     bool success = await AuthService.login(email, password);
 
     if (success) {
-      // Navegar a la pantalla principal (a implementar)
+      Navigator.pushReplacementNamed(context, "/home");
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Credenciales incorrectas")),
       );
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   SizedBox(height: 25),
 
-                  // Botón de "Iniciar sesión" 
+                  // Botón de "Iniciar sesión"
                   SizedBox(
                     width: double.infinity,
                     height: 55,
