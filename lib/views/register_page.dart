@@ -14,10 +14,20 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController confirmPasswordController = TextEditingController();
 
   void register() async {
-    String email = emailController.text;
-    String confirmEmail = confirmEmailController.text;
-    String password = passwordController.text;
-    String confirmPassword = confirmPasswordController.text;
+    String email = emailController.text.trim();
+    String confirmEmail = confirmEmailController.text.trim();
+    String password = passwordController.text.trim();
+    String confirmPassword = confirmPasswordController.text.trim();
+
+
+    bool emailValid = RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$").hasMatch(email);
+    if (!emailValid) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Ingresa un correo válido")),
+      );
+      return;
+    }
+
 
     if (email != confirmEmail) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -25,6 +35,15 @@ class _RegisterPageState extends State<RegisterPage> {
       );
       return;
     }
+
+
+    if (password.length < 6) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("La contraseña debe tener al menos 6 caracteres")),
+      );
+      return;
+    }
+
 
     if (password != confirmPassword) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -39,7 +58,7 @@ class _RegisterPageState extends State<RegisterPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Registro exitoso. Ahora puedes iniciar sesión.")),
       );
-      Navigator.pop(context); // Volver a la pantalla de login
+      Navigator.pop(context);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Error al registrarse")),
