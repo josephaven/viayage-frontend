@@ -6,12 +6,12 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // Fondo blanco limpio
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Logo
+
             Image.asset(
               'assets/logo.png',
               height: 140,
@@ -19,7 +19,7 @@ class WelcomePage extends StatelessWidget {
 
             SizedBox(height: 80),
 
-            // Botón de "Iniciar sesión"
+            // Botón de Iniciar sesión
             SizedBox(
               width: 280,
               height: 55,
@@ -42,7 +42,7 @@ class WelcomePage extends StatelessWidget {
 
             SizedBox(height: 20),
 
-            // Botón de "Registrarse"
+            // Botón de Registrarse
             TextButton(
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (_) => RegisterPage()));

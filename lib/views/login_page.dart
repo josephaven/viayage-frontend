@@ -12,19 +12,17 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController passwordController = TextEditingController();
 
   void login() async {
-    print("✏ Email ingresado: ${emailController.text}");
-    print("🔒 Contraseña ingresada: ${passwordController.text}");
 
-    String email = emailController.text.trim(); // Eliminar espacios en blanco
-    String password = passwordController.text.trim(); // Eliminar espacios en blanco
+    String email = emailController.text.trim();
+    String password = passwordController.text.trim();
 
     bool success = await AuthService.login(email, password);
 
     if (success) {
-      Navigator.pushReplacementNamed(context, "/home"); // Redirigir a la pantalla principal
+      Navigator.pushReplacementNamed(context, "/home");
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Credenciales incorrectas")),
+        SnackBar(content: Text("Correo o contraseña incorrectos")),
       );
     }
   }
@@ -44,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
               height: 100,
             ),
 
-            SizedBox(height: 40), // Espaciado entre logo y formulario
+            SizedBox(height: 40),
 
             // Contenedor del formulario
             Container(
@@ -59,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   SizedBox(height: 10),
 
-                  // Campos de texto
+                  // Ingresar correo
                   SizedBox(
                     height: 50,
                     child: Container(
@@ -72,6 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   SizedBox(height: 12),
 
+                  // Ingresar contraseña
                   SizedBox(
                     height: 50,
                     child: Container(
@@ -84,13 +83,13 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   SizedBox(height: 25),
 
-                  // Botón de "Iniciar sesión"
+                  // Botón de Iniciar sesión
                   SizedBox(
                     width: double.infinity,
                     height: 55,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.lightBlue[100], // Color del botón
+                        backgroundColor: Color(0xFFE0EBF6), // Color del botón
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -104,9 +103,11 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   SizedBox(height: 15),
 
-                  // Botón de "Recuperar contraseña"
+                  // Botón de Recuperar contraseña
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/forgot-password");
+                    },
                     child: Text(
                       "Recuperar contraseña",
                       style: TextStyle(fontSize: 16, color: Colors.white54),
