@@ -95,17 +95,11 @@ flutter:
 
   assets:
     - assets/logo.png
-    - assets/amigos.png
-    - assets/compras.png
-    - assets/cultura.png
-    - assets/familia.png
-    - assets/gastronomia.png
-    - assets/naturaleza.png
-    - assets/nocturna.png
-    - assets/pareja.png
-    - assets/relax.png
-    - assets/solo.png
-    - assets/ninguna.png
-    - assets/vegana.png
-    - assets/vegetariana.png
-    - assets/singluten.png
+    - assets/companion/amigos.png
+    - assets/companion/familia.png
+    - assets/companion/pareja.png
+    - assets/companion/solo.png
+    - assets/food/ninguna.png
+    - assets/food/singluten.png
+    - assets/food/vegana.png
+    - assets/food/vegetariana.png
