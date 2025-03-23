@@ -95,3 +95,13 @@ flutter:
 
   assets:
     - assets/logo.png
+    - assets/amigos.png
+    - assets/compras.png
+    - assets/cultura.png
+    - assets/familia.png
+    - assets/gastronomia.png
+    - assets/naturaleza.png
+    - assets/nocturna.png
+    - assets/pareja.png
+    - assets/relax.png
+    - assets/solo.png
