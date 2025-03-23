@@ -14,8 +14,8 @@ class _QuestionnaireStep3State extends State<QuestionnaireStep3> {
   final List<Map<String, String>> options = [
     {"label": "Vegana", "image": "assets/food/vegana.png"},
     {"label": "Vegetariana", "image": "assets/food/vegetariana.png"},
-    {"label": "Local", "image": "assets/food/local.png"},
-    {"label": "Internacional", "image": "assets/food/internacional.png"},
+    {"label": "Ninguna, como de todo", "image": "assets/food/ninguna.png"},
+    {"label": "Sin gluten", "image": "assets/food/singluten.png"},
   ];
 
   void selectOption(String label) {
