@@ -12,9 +12,9 @@ class _QuestionnaireStep4State extends State<QuestionnaireStep4> {
   String? selected;
 
   final List<Map<String, String>> options = [
-    {"label": "Lugares turísticos icónicos", "image": "assets/city/turistico.jpg"},
-    {"label": "Lugares menos conocidos, fuera del turismo tradicional", "image": "assets/city/local.jpg"},
-    {"label": "Mezcla de ambos", "image": "assets/city/ambos.jpg"},
+    {"label": "Lugares turísticos icónicos", "image": "assets/city/turistico.png"},
+    {"label": "Lugares menos conocidos, fuera del turismo tradicional", "image": "assets/city/local.png"},
+    {"label": "Mezcla de ambos", "image": "assets/city/ambos.png"},
   ];
 
   void selectOption(String label) {
