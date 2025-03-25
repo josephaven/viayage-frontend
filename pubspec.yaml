@@ -103,3 +103,6 @@ flutter:
     - assets/food/singluten.png
     - assets/food/vegana.png
     - assets/food/vegetariana.png
+    - assets/city/turistico.png
+    - assets/city/local.png
+    - assets/city/ambos.png
