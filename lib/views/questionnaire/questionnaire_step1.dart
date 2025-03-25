@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class QuestionnairePage extends StatefulWidget {
+class QuestionnaireStep1 extends StatefulWidget {
   @override
-  _QuestionnairePageState createState() => _QuestionnairePageState();
+  _QuestionnaireStep1State createState() => _QuestionnaireStep1State();
 }
 
-class _QuestionnairePageState extends State<QuestionnairePage> {
+class _QuestionnaireStep1State extends State<QuestionnaireStep1> {
   Set<String> selectedOptions = {};
   final List<Map<String, String>> interests = [
     {"label": "Cultura e historia", "image": "assets/interests/cultura.png"},
