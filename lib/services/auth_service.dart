@@ -23,6 +23,26 @@ class AuthService {
     return false;
   }
 
+  // Método para verificar si ya respondió el cuestionario
+  static Future<bool> hasCompletedQuestionnaire() async {
+    final token = await _storage.read(key: "token");
+
+    final response = await http.get(
+      Uri.parse("$baseUrl/questionnaire/status"),
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $token",
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      return data["completed"] == true;
+    }
+
+    return false;
+  }
+
 
 
   // Método para registrarse

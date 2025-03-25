@@ -12,20 +12,26 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController passwordController = TextEditingController();
 
   void login() async {
-
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
 
     bool success = await AuthService.login(email, password);
 
     if (success) {
-      Navigator.pushReplacementNamed(context, "/home");
+      bool hasCompleted = await AuthService.hasCompletedQuestionnaire();
+
+      if (hasCompleted) {
+        Navigator.pushReplacementNamed(context, "/home");
+      } else {
+        Navigator.pushReplacementNamed(context, "/questionnaire-step1");
+      }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Correo o contraseña incorrectos")),
       );
     }
   }
+
 
 
   @override
