@@ -14,9 +14,9 @@ class _QuestionnaireStep6State extends State<QuestionnaireStep6> {
   String? selected;
 
   final List<Map<String, String>> options = [
-    {"label": "Bajo", "image": "assets/budget/bajo.jpg"},
-    {"label": "Medio", "image": "assets/budget/medio.jpg"},
-    {"label": "Alto", "image": "assets/budget/alto.jpg"},
+    {"label": "Bajo", "image": "assets/budget/presupuesto.jpg"},
+    {"label": "Medio", "image": "assets/budget/presupuesto.jpg"},
+    {"label": "Alto", "image": "assets/budget/presupuesto.jpg"},
   ];
 
   void selectOption(String label) {
@@ -64,8 +64,10 @@ class _QuestionnaireStep6State extends State<QuestionnaireStep6> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("¿Cuál es tu presupuesto aproximado para el viaje?",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              Text("Cuestionario", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              SizedBox(height: 20),
+              Text("Tiempo de permanencia en cada luga", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              Text("Selecciona un promedio aproximado", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
               SizedBox(height: 20),
               Expanded(
                 child: GridView.count(

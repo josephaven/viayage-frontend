@@ -48,7 +48,10 @@ class _QuestionnaireStep4State extends State<QuestionnaireStep4> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("¿Qué tipo de interacción prefieres con la ciudad?", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              Text("Cuestionario", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              SizedBox(height: 20),
+              Text("Interacción con la ciudad", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              Text("¿Qué prefieres en tu experiencia de viaje?", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
               SizedBox(height: 20),
               Expanded(
                 child: GridView.count(

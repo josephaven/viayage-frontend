@@ -49,7 +49,10 @@ class _QuestionnaireStep3State extends State<QuestionnaireStep3> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("¿Qué tipo de comida prefieres?", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+              Text("Cuestionario", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              SizedBox(height: 20),
+              Text("Preferencias gastronómicas", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              Text("Selecciona si tienes alguna restricción o preferencia alimentaria", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
               SizedBox(height: 20),
               Expanded(
                 child: GridView.count(

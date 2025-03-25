@@ -49,7 +49,10 @@ class _QuestionnaireStep2State extends State<QuestionnaireStep2> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("¿Con quién viajas?", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+              Text("Cuestionario", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              SizedBox(height: 20),
+              Text("Compañía en el viaje", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              Text("¿Con quién viajas?", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
               SizedBox(height: 20),
               Expanded(
                 child: GridView.count(

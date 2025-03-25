@@ -12,9 +12,9 @@ class _QuestionnaireStep5State extends State<QuestionnaireStep5> {
   String? selected;
 
   final List<Map<String, String>> options = [
-    {"label": "Menos de 30 min", "image": "assets/duration/reloj.png"},
-    {"label": "30 - 60 min", "image": "assets/duration/reloj.png"},
-    {"label": "Más de 1 hora", "image": "assets/duration/reloj.png"},
+    {"label": "Menos de 30 min", "image": "assets/duration/duracion.png"},
+    {"label": "30 - 60 min", "image": "assets/duration/duracion.png"},
+    {"label": "Más de 1 hora", "image": "assets/duration/duracion.png"},
   ];
 
   void selectOption(String label) {
@@ -48,7 +48,10 @@ class _QuestionnaireStep5State extends State<QuestionnaireStep5> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("¿Cuánto tiempo te gustaría pasar en cada lugar?", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              Text("Cuestionario", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              SizedBox(height: 20),
+              Text("Presupuesto diario", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              Text("Selecciona tu rango aproximado de gasto en actividades y comida", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
               SizedBox(height: 20),
               Expanded(
                 child: GridView.count(
