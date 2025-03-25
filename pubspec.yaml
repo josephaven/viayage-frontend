@@ -108,3 +108,9 @@ flutter:
     - assets/city/ambos.png
     - assets/duration/duracion.png
     - assets/budget/presupuesto.png
+    - assets/interests/compras.png
+    - assets/interests/cultura.png
+    - assets/interests/gastronomia.png
+    - assets/interests/naturaleza.png
+    - assets/interests/nocturna.png
+    - assets/interests/relax.png
