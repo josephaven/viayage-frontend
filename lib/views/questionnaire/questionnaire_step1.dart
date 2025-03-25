@@ -82,11 +82,7 @@ class _QuestionnaireStep1State extends State<QuestionnaireStep1> {
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: selectedOptions.isNotEmpty
-                      ? () {
-                   
-                  }
-                      : null,
+                  onPressed: selectedOptions.isNotEmpty ? goToNextStep: null,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFFE0EBF6),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
