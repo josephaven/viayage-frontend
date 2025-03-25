@@ -14,9 +14,9 @@ class _QuestionnaireStep6State extends State<QuestionnaireStep6> {
   String? selected;
 
   final List<Map<String, String>> options = [
-    {"label": "Bajo", "image": "assets/budget/presupuesto.png"},
-    {"label": "Medio", "image": "assets/budget/presupuesto.png"},
-    {"label": "Alto", "image": "assets/budget/presupuesto.png"},
+    {"label": "Bajo", "image": "assets/budget/bajo.jpg"},
+    {"label": "Medio", "image": "assets/budget/medio.jpg"},
+    {"label": "Alto", "image": "assets/budget/alto.jpg"},
   ];
 
   void selectOption(String label) {
@@ -34,20 +34,22 @@ class _QuestionnaireStep6State extends State<QuestionnaireStep6> {
     try {
       final response = await http.post(
         Uri.parse("http://10.0.2.2:3000/questionnaire"),
-        headers: {"Content-Type": "application/json"},
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: jsonEncode(allResponses),
       );
 
-      if (response.statusCode == 201 || response.statusCode == 200) {
-        Navigator.pushReplacementNamed(context, '/home');
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        Navigator.pushReplacementNamed(context, "/home");
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Error al enviar respuestas")),
+          SnackBar(content: Text("Error al enviar el cuestionario")),
         );
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Fallo de conexión al servidor")),
+        SnackBar(content: Text("Fallo al conectar con el servidor")),
       );
     }
   }
@@ -62,7 +64,8 @@ class _QuestionnaireStep6State extends State<QuestionnaireStep6> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("¿Cuál es tu presupuesto aproximado para el viaje?", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              Text("¿Cuál es tu presupuesto aproximado para el viaje?",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
               SizedBox(height: 20),
               Expanded(
                 child: GridView.count(

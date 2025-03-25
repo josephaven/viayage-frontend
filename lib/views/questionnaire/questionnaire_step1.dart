@@ -26,6 +26,16 @@ class _QuestionnaireStep1State extends State<QuestionnaireStep1> {
     });
   }
 
+  void goToNextStep() {
+    Navigator.pushNamed(
+      context,
+      "/questionnaire-step2",
+      arguments: {
+        "travelInterests": selectedOptions.toList(),
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

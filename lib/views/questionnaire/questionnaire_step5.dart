@@ -25,11 +25,15 @@ class _QuestionnaireStep5State extends State<QuestionnaireStep5> {
 
   void goNext() {
     if (selected != null) {
-      widget.responses["visitDuration"] = selected!;
+      final updatedResponses = {
+        ...widget.responses,
+        "visitDuration": selected,
+      };
+
       Navigator.pushNamed(
         context,
         "/questionnaire-step6",
-        arguments: widget.responses,
+        arguments: updatedResponses,
       );
     }
   }

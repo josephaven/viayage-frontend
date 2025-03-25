@@ -26,11 +26,15 @@ class _QuestionnaireStep3State extends State<QuestionnaireStep3> {
 
   void goNext() {
     if (selected != null) {
-      widget.responses["foodPreference"] = selected!;
+      final updatedResponses = {
+        ...widget.responses,
+        "foodPreference": selected,
+      };
+
       Navigator.pushNamed(
         context,
         "/questionnaire-step4",
-        arguments: widget.responses,
+        arguments: updatedResponses,
       );
     }
   }
