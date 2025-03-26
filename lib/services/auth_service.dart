@@ -6,6 +6,7 @@ class AuthService {
   static String baseUrl = "http://10.0.2.2:3000/auth";
   static final _storage = FlutterSecureStorage();
 
+
   // Método para iniciar sesión
   static Future<bool> login(String email, String password) async {
     var response = await http.post(
@@ -22,6 +23,7 @@ class AuthService {
 
     return false;
   }
+
 
   // Método para verificar si ya respondió el cuestionario
   static Future<bool> hasCompletedQuestionnaire() async {
@@ -42,7 +44,6 @@ class AuthService {
 
     return false;
   }
-
 
 
   // Método para registrarse
@@ -67,23 +68,18 @@ class AuthService {
           "password": password,
         }),
       );
-
-      print("📩 REGISTER STATUS: ${response.statusCode}");
-      print("📩 REGISTER BODY: ${response.body}");
-
       return response.statusCode == 201;
     } catch (e) {
-      print("❌ ERROR REGISTER: $e");
       return false;
     }
   }
-
 
 
   // Método para cerrar sesión
   static Future<void> logout() async {
     await _storage.delete(key: "token");
   }
+
 
   // Método para obtener el token almacenado
   static Future<String?> getToken() async {
@@ -102,5 +98,25 @@ class AuthService {
       return false;
     }
   }
+
+  // Método para devolver los datos del usuario en su perfil
+  static Future<Map<String, dynamic>?> getUserProfile() async {
+    final token = await _storage.read(key: "token");
+
+    final response = await http.get(
+      Uri.parse("http://10.0.2.2:3000/users/profile"),
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $token",
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    }
+
+    return null;
+  }
+
 
 }
