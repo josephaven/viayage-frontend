@@ -18,9 +18,9 @@ class _LoginPageState extends State<LoginPage> {
     bool success = await AuthService.login(email, password);
 
     if (success) {
-      bool hasCompleted = await AuthService.hasCompletedQuestionnaire();
+      final completed = await AuthService.hasCompletedQuestionnaire();
 
-      if (hasCompleted) {
+      if (completed) {
         Navigator.pushReplacementNamed(context, "/home");
       } else {
         Navigator.pushReplacementNamed(context, "/questionnaire-step1");
@@ -31,6 +31,7 @@ class _LoginPageState extends State<LoginPage> {
       );
     }
   }
+
 
 
 
