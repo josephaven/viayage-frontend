@@ -6,8 +6,6 @@ import 'views/register_page.dart';
 import 'views/home_page.dart';
 import 'views/forgot_password_page.dart';
 import 'views/reset_password_page.dart';
-
-
 import 'views/questionnaire/questionnaire_step1.dart';
 import 'views/questionnaire/questionnaire_step2.dart';
 import 'views/questionnaire/questionnaire_step3.dart';
@@ -29,6 +27,7 @@ class MyApp extends StatelessWidget {
         "/": (context) => WelcomePage(),
         "/login": (context) => LoginPage(),
         "/register": (context) => RegisterPage(),
+        "/questionnaire-step1": (context) => QuestionnaireStep1(),
         "/home": (context) => HomePage(),
         "/forgot-password": (context) => ForgotPasswordPage(),
         "/reset-password": (context) => ResetPasswordPage(token: ''), // temporal
