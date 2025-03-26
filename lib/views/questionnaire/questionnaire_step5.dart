@@ -50,8 +50,8 @@ class _QuestionnaireStep5State extends State<QuestionnaireStep5> {
             children: [
               Text("Cuestionario", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
               SizedBox(height: 20),
-              Text("Presupuesto diario", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-              Text("Selecciona tu rango aproximado de gasto en actividades y comida", style: TextStyle(fontSize: 14)),
+              Text("Tiempo de permanencia en cada lugar", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              Text("Selecciona un promedio aproximado", style: TextStyle(fontSize: 14)),
               SizedBox(height: 20),
               Expanded(
                 child: GridView.count(
