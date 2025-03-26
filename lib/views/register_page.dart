@@ -18,9 +18,22 @@ class _RegisterPageState extends State<RegisterPage> {
   String? selectedGender;
 
   void register() async {
-    String email = emailController.text;
-    String password = passwordController.text;
-    String confirmPassword = confirmPasswordController.text;
+    final nombre = nameController.text.trim();
+    final apellido = lastNameController.text.trim();
+    final email = emailController.text.trim();
+    final password = passwordController.text.trim();
+    final confirmPassword = confirmPasswordController.text.trim();
+    final genero = selectedGender ?? '';
+    final fechaNacimiento = selectedDate != null
+        ? selectedDate!.toIso8601String().split("T").first
+        : '';
+
+    if (nombre.isEmpty || apellido.isEmpty || fechaNacimiento.isEmpty || genero.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Por favor completa todos los campos.")),
+      );
+      return;
+    }
 
     if (!email.contains('@')) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -43,7 +56,14 @@ class _RegisterPageState extends State<RegisterPage> {
       return;
     }
 
-    final success = await AuthService.register(email, password);
+    final success = await AuthService.register(
+      nombre: nombre,
+      apellido: apellido,
+      fechaNacimiento: fechaNacimiento,
+      genero: genero.toLowerCase(),
+      email: email,
+      password: password,
+    );
 
     if (success) {
       Navigator.pop(context);
@@ -53,6 +73,7 @@ class _RegisterPageState extends State<RegisterPage> {
       );
     }
   }
+
 
   Future<void> _selectDate() async {
     DateTime? picked = await showDatePicker(
