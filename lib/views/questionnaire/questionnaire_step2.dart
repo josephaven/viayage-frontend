@@ -52,7 +52,7 @@ class _QuestionnaireStep2State extends State<QuestionnaireStep2> {
               Text("Cuestionario", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
               SizedBox(height: 20),
               Text("Compañía en el viaje", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-              Text("¿Con quién viajas?", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+              Text("¿Con quién viajas?", style: TextStyle(fontSize: 14)),
               SizedBox(height: 20),
               Expanded(
                 child: GridView.count(
@@ -74,7 +74,7 @@ class _QuestionnaireStep2State extends State<QuestionnaireStep2> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Image.asset(option["image"]!, height: 60),
+                            Image.asset(option["image"]!, height: 100),
                             SizedBox(height: 10),
                             Text(option["label"]!, style: TextStyle(fontSize: 14)),
                           ],

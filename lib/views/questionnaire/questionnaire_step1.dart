@@ -68,7 +68,7 @@ class _QuestionnaireStep1State extends State<QuestionnaireStep1> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Image.asset(interest["image"]!, height: 60),
+                            Image.asset(interest["image"]!, height: 100),
                             SizedBox(height: 10),
                             Text(interest["label"]!, style: TextStyle(fontSize: 14)),
                           ],

@@ -51,7 +51,7 @@ class _QuestionnaireStep5State extends State<QuestionnaireStep5> {
               Text("Cuestionario", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
               SizedBox(height: 20),
               Text("Presupuesto diario", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-              Text("Selecciona tu rango aproximado de gasto en actividades y comida", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+              Text("Selecciona tu rango aproximado de gasto en actividades y comida", style: TextStyle(fontSize: 14)),
               SizedBox(height: 20),
               Expanded(
                 child: GridView.count(
@@ -73,7 +73,7 @@ class _QuestionnaireStep5State extends State<QuestionnaireStep5> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Image.asset(option["image"]!, height: 60),
+                            Image.asset(option["image"]!, height: 100),
                             SizedBox(height: 10),
                             Text(option["label"]!, textAlign: TextAlign.center, style: TextStyle(fontSize: 14)),
                           ],
