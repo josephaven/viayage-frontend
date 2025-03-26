@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import '../../services/auth_service.dart';
+
+
 
 class QuestionnaireStep6 extends StatefulWidget {
   final Map<String, dynamic> responses;
@@ -14,9 +17,9 @@ class _QuestionnaireStep6State extends State<QuestionnaireStep6> {
   String? selected;
 
   final List<Map<String, String>> options = [
-    {"label": "Bajo", "image": "assets/budget/presupuesto.jpg"},
-    {"label": "Medio", "image": "assets/budget/presupuesto.jpg"},
-    {"label": "Alto", "image": "assets/budget/presupuesto.jpg"},
+    {"label": "Bajo", "image": "assets/budget/presupuesto.png"},
+    {"label": "Medio", "image": "assets/budget/presupuesto.png"},
+    {"label": "Alto", "image": "assets/budget/presupuesto.png"},
   ];
 
   void selectOption(String label) {
@@ -32,10 +35,12 @@ class _QuestionnaireStep6State extends State<QuestionnaireStep6> {
     };
 
     try {
+      final token = await AuthService.getToken();
       final response = await http.post(
         Uri.parse("http://10.0.2.2:3000/questionnaire"),
         headers: {
           "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
         },
         body: jsonEncode(allResponses),
       );
@@ -54,6 +59,7 @@ class _QuestionnaireStep6State extends State<QuestionnaireStep6> {
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,7 +72,7 @@ class _QuestionnaireStep6State extends State<QuestionnaireStep6> {
             children: [
               Text("Cuestionario", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
               SizedBox(height: 20),
-              Text("Tiempo de permanencia en cada luga", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              Text("Tiempo de permanencia en cada lugar", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
               Text("Selecciona un promedio aproximado", style: TextStyle(fontSize: 14)),
               SizedBox(height: 20),
               Expanded(
