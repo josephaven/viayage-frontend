@@ -7,7 +7,8 @@ import '../../services/auth_service.dart';
 
 class QuestionnaireStep6 extends StatefulWidget {
   final Map<String, dynamic> responses;
-  QuestionnaireStep6({required this.responses});
+  final bool isEditing;
+  QuestionnaireStep6({required this.responses, this.isEditing = false});
 
   @override
   _QuestionnaireStep6State createState() => _QuestionnaireStep6State();
@@ -56,6 +57,14 @@ class _QuestionnaireStep6State extends State<QuestionnaireStep6> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Fallo al conectar con el servidor")),
       );
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.isEditing && widget.responses.containsKey("budget")) {
+      selected = widget.responses["budget"];
     }
   }
 
@@ -109,7 +118,33 @@ class _QuestionnaireStep6State extends State<QuestionnaireStep6> {
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: selected != null ? submitAnswers : null,
+                  onPressed: selected != null
+                      ? () async {
+                    final updatedResponses = {
+                      ...widget.responses,
+                      "budget": selected,
+                    };
+
+                    final token = await AuthService.getToken();
+
+                    final response = await http.post(
+                      Uri.parse("http://10.0.2.2:3000/questionnaire"),
+                      headers: {
+                        "Authorization": "Bearer $token",
+                        "Content-Type": "application/json",
+                      },
+                      body: jsonEncode(updatedResponses),
+                    );
+
+                    if (response.statusCode == 200 || response.statusCode == 201) {
+                      Navigator.pushReplacementNamed(context, "/home");
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("Error al guardar el cuestionario")),
+                      );
+                    }
+                  }
+                      : null,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFFE0EBF6),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

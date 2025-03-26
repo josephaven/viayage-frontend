@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:viayage_app/views/questionnaire/questionnaire_step5.dart';
 
 class QuestionnaireStep4 extends StatefulWidget {
   final Map<String, dynamic> responses;
-  QuestionnaireStep4({required this.responses});
+  final bool isEditing;
+  QuestionnaireStep4({required this.responses, this.isEditing = false});
 
   @override
   _QuestionnaireStep4State createState() => _QuestionnaireStep4State();
@@ -37,6 +39,16 @@ class _QuestionnaireStep4State extends State<QuestionnaireStep4> {
       );
     }
   }
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.isEditing && widget.responses.containsKey("cityPreference")) {
+      selected = widget.responses["cityPreference"];
+    }
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +99,24 @@ class _QuestionnaireStep4State extends State<QuestionnaireStep4> {
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: selected != null ? goNext : null,
+                  onPressed: selected != null
+                      ? () {
+                    final updatedResponses = {
+                      ...widget.responses,
+                      "cityPreference": selected,
+                    };
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => QuestionnaireStep5(
+                          responses: updatedResponses,
+                          isEditing: widget.isEditing,
+                        ),
+                      ),
+                    );
+                  }
+                      : null,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFFE0EBF6),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

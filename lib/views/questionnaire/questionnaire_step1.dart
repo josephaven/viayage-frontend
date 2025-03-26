@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 
 class QuestionnaireStep1 extends StatefulWidget {
+  final Map<String, dynamic>? initialResponses;
+  final bool isEditing;
+
+  QuestionnaireStep1({this.initialResponses, this.isEditing = false});
+
   @override
   _QuestionnaireStep1State createState() => _QuestionnaireStep1State();
+
 }
 
 class _QuestionnaireStep1State extends State<QuestionnaireStep1> {
@@ -35,6 +41,15 @@ class _QuestionnaireStep1State extends State<QuestionnaireStep1> {
       },
     );
   }
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.initialResponses != null && widget.initialResponses!["travelInterests"] != null) {
+      selectedOptions = Set<String>.from(widget.initialResponses!["travelInterests"]);
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
