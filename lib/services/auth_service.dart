@@ -28,7 +28,7 @@ class AuthService {
     final token = await _storage.read(key: "token");
 
     final response = await http.get(
-      Uri.parse("$baseUrl/questionnaire/status"),
+      Uri.parse("http://10.0.2.2:3000/questionnaire/status"),
       headers: {
         "Content-Type": "application/json",
         "Authorization": "Bearer $token",
@@ -46,15 +46,39 @@ class AuthService {
 
 
   // Método para registrarse
-  static Future<bool> register(String email, String password) async {
-    var response = await http.post(
-      Uri.parse("$baseUrl/register"),
-      headers: {"Content-Type": "application/json"},
-      body: jsonEncode({"email": email, "password": password}),
-    );
+  static Future<bool> register({
+    required String nombre,
+    required String apellido,
+    required String fechaNacimiento,
+    required String genero,
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final response = await http.post(
+        Uri.parse("$baseUrl/register"),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({
+          "nombre": nombre,
+          "apellido": apellido,
+          "fechaNacimiento": fechaNacimiento,
+          "genero": genero.toLowerCase(), // para que sea "masculino", no "Masculino"
+          "email": email,
+          "password": password,
+        }),
+      );
 
-    return response.statusCode == 201;
+      print("📩 REGISTER STATUS: ${response.statusCode}");
+      print("📩 REGISTER BODY: ${response.body}");
+
+      return response.statusCode == 201;
+    } catch (e) {
+      print("❌ ERROR REGISTER: $e");
+      return false;
+    }
   }
+
+
 
   // Método para cerrar sesión
   static Future<void> logout() async {
