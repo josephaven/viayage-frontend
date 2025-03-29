@@ -4,19 +4,30 @@ class TextInput extends StatelessWidget {
   final String label;
   final TextEditingController controller;
   final bool isPassword;
+  final Color backgroundColor;
+  final double borderRadius;
 
-  TextInput({required this.label, required this.controller, this.isPassword = false});
+  const TextInput({
+    required this.label,
+    required this.controller,
+    this.isPassword = false,
+    this.backgroundColor = const Color(0xFFF5F5F5),
+    this.borderRadius = 12,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(8.0),
-      child: TextField(
-        controller: controller,
-        obscureText: isPassword,
-        decoration: InputDecoration(
-          labelText: label,
-          border: OutlineInputBorder(),
+    return TextField(
+      controller: controller,
+      obscureText: isPassword,
+      decoration: InputDecoration(
+        labelText: label,
+        filled: true,
+        fillColor: backgroundColor,
+        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius),
+          borderSide: BorderSide.none,
         ),
       ),
     );
