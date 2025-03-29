@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:viayage_app/services/auth_service.dart';
 import 'package:viayage_app/views/edit_profile_page.dart';
-import 'package:viayage_app/views/questionnaire/questionnaire_step1.dart';
+import 'package:viayage_app/widgets/custom_loader.dart';
+
 
 
 class AccountPage extends StatefulWidget {
@@ -12,6 +13,7 @@ class AccountPage extends StatefulWidget {
 class _AccountPageState extends State<AccountPage> {
   String nombre = "";
   String email = "";
+  bool isLoading = true;
 
   @override
   void initState() {
@@ -24,6 +26,7 @@ class _AccountPageState extends State<AccountPage> {
     setState(() {
       nombre = data?["nombre"]??"";
       email = data?["email"]??"";
+      isLoading = false;
     });
   }
 
@@ -34,6 +37,12 @@ class _AccountPageState extends State<AccountPage> {
 
   @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      return Scaffold(
+        backgroundColor: Colors.white,
+        body: Center(child: CustomLoader()),
+      );
+    }
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -68,25 +77,6 @@ class _AccountPageState extends State<AccountPage> {
               ),
               SizedBox(height: 30),
 
-              ListTile(
-                leading: Icon(Icons.language),
-                title: Text("Idioma"),
-                trailing: Icon(Icons.arrow_forward_ios, size: 16),
-                onTap: () {
-                },
-              ),
-              Divider(),
-              ListTile(
-                leading: Icon(Icons.shield_outlined),
-                title: Text("Cuestionario"),
-                trailing: Icon(Icons.arrow_forward_ios, size: 16),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => QuestionnaireStep1()),
-                  );
-                },
-              ),
               Divider(),
 
               Spacer(),
