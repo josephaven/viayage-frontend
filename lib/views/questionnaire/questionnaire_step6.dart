@@ -128,7 +128,7 @@ class _QuestionnaireStep6State extends State<QuestionnaireStep6> {
                     final token = await AuthService.getToken();
 
                     final response = await http.post(
-                      Uri.parse("http://10.0.2.2:3000/questionnaire"),
+                      Uri.parse("https://d80d-189-203-85-208.ngrok-free.app/questionnaire"),
                       headers: {
                         "Authorization": "Bearer $token",
                         "Content-Type": "application/json",
@@ -137,7 +137,7 @@ class _QuestionnaireStep6State extends State<QuestionnaireStep6> {
                     );
 
                     if (response.statusCode == 200 || response.statusCode == 201) {
-                      Navigator.pushReplacementNamed(context, "/home");
+                      Navigator.pushReplacementNamed(context, "/main");
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text("Error al guardar el cuestionario")),

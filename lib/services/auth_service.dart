@@ -3,26 +3,43 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:convert';
 
 class AuthService {
-  static String baseUrl = "http://10.0.2.2:3000/auth";
+  static String baseUrl = "https://d80d-189-203-85-208.ngrok-free.app/auth";
   static final _storage = FlutterSecureStorage();
 
 
   // Método para iniciar sesión
   static Future<bool> login(String email, String password) async {
-    var response = await http.post(
-      Uri.parse("$baseUrl/login"),
-      headers: {"Content-Type": "application/json"},
-      body: jsonEncode({"email": email, "password": password}),
-    );
+    try {
+      final response = await http.post(
+        Uri.parse("$baseUrl/login"),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({"email": email, "password": password}),
+      );
 
-    if (response.statusCode == 200 || response.statusCode == 201) {
-      var data = jsonDecode(response.body);
-      await FlutterSecureStorage().write(key: "token", value: data["access_token"]); // Guardar token
-      return true;
+      print("Código de estado: ${response.statusCode}");
+      print("Respuesta: ${response.body}");
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = jsonDecode(response.body);
+        final token = data["access_token"];
+
+        if (token != null) {
+          await FlutterSecureStorage().write(key: "token", value: token);
+          return true;
+        } else {
+          print("No se encontró access_token en la respuesta.");
+          return false;
+        }
+      } else {
+        print("Fallo al iniciar sesión: código ${response.statusCode}");
+        return false;
+      }
+    } catch (e) {
+      print("Excepción al hacer login: $e");
+      return false;
     }
-
-    return false;
   }
+
 
 
   // Método para verificar si ya respondió el cuestionario
@@ -30,12 +47,14 @@ class AuthService {
     final token = await _storage.read(key: "token");
 
     final response = await http.get(
-      Uri.parse("http://10.0.2.2:3000/questionnaire/status"),
+      Uri.parse("https://d80d-189-203-85-208.ngrok-free.app/questionnaire/status"),
       headers: {
         "Content-Type": "application/json",
         "Authorization": "Bearer $token",
       },
     );
+
+    print("Respuesta del cuestionario: ${response.body}");
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
@@ -44,6 +63,7 @@ class AuthService {
 
     return false;
   }
+
 
 
   // Método para registrarse
@@ -104,7 +124,7 @@ class AuthService {
     final token = await _storage.read(key: "token");
 
     final response = await http.get(
-      Uri.parse("http://10.0.2.2:3000/users/profile"),
+      Uri.parse("https://d80d-189-203-85-208.ngrok-free.app/users/profile"),
       headers: {
         "Content-Type": "application/json",
         "Authorization": "Bearer $token",
@@ -117,6 +137,12 @@ class AuthService {
 
     return null;
   }
+
+  static Future<bool> isLoggedIn() async {
+    final token = await _storage.read(key: "token");
+    return token != null && token.isNotEmpty;
+  }
+
 
 
 }
