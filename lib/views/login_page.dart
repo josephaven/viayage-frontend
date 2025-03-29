@@ -21,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
       final completed = await AuthService.hasCompletedQuestionnaire();
 
       if (completed) {
-        Navigator.pushReplacementNamed(context, "/home");
+        Navigator.pushReplacementNamed(context, "/main");
       } else {
         Navigator.pushReplacementNamed(context, "/questionnaire-step1");
       }
@@ -51,7 +51,6 @@ class _LoginPageState extends State<LoginPage> {
 
             SizedBox(height: 40),
 
-            // Contenedor del formulario
             Container(
               width: MediaQuery.of(context).size.width * 0.9,
               padding: EdgeInsets.all(20),
@@ -64,7 +63,6 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   SizedBox(height: 10),
 
-                  // Ingresar correo
                   SizedBox(
                     height: 50,
                     child: Container(
@@ -77,7 +75,6 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   SizedBox(height: 12),
 
-                  // Ingresar contraseña
                   SizedBox(
                     height: 50,
                     child: Container(
@@ -90,7 +87,6 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   SizedBox(height: 25),
 
-                  // Botón de Iniciar sesión
                   SizedBox(
                     width: double.infinity,
                     height: 55,
@@ -110,7 +106,6 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   SizedBox(height: 15),
 
-                  // Botón de Recuperar contraseña
                   TextButton(
                     onPressed: () {
                       Navigator.pushNamed(context, "/forgot-password");

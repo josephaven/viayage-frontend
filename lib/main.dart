@@ -1,33 +1,54 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'views/welcome_page.dart';
-import 'views/login_page.dart';
-import 'views/register_page.dart';
-import 'views/home_page.dart';
-import 'views/forgot_password_page.dart';
-import 'views/reset_password_page.dart';
-import 'views/questionnaire/questionnaire_step1.dart';
-import 'views/questionnaire/questionnaire_step2.dart';
-import 'views/questionnaire/questionnaire_step3.dart';
-import 'views/questionnaire/questionnaire_step4.dart';
-import 'views/questionnaire/questionnaire_step5.dart';
-import 'views/questionnaire/questionnaire_step6.dart';
+import 'package:viayage_app/services/auth_service.dart';
+import 'package:viayage_app/views/welcome_page.dart';
+import 'package:viayage_app/views/login_page.dart';
+import 'package:viayage_app/views/register_page.dart';
+import 'package:viayage_app/views/home_page.dart';
+import 'package:viayage_app/views/forgot_password_page.dart';
+import 'package:viayage_app/views/reset_password_page.dart';
+import 'package:viayage_app/views/main_screen.dart';
+import 'package:viayage_app/views/questionnaire/questionnaire_step1.dart';
+import 'package:viayage_app/views/questionnaire/questionnaire_step2.dart';
+import 'package:viayage_app/views/questionnaire/questionnaire_step3.dart';
+import 'package:viayage_app/views/questionnaire/questionnaire_step4.dart';
+import 'package:viayage_app/views/questionnaire/questionnaire_step5.dart';
+import 'package:viayage_app/views/questionnaire/questionnaire_step6.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  Future<Widget> _getInitialScreen() async {
+    final token = await AuthService.getToken();
+    if (token != null) {
+      final completed = await AuthService.hasCompletedQuestionnaire();
+      return completed ? MainScreen() : QuestionnaireStep1();
+    }
+    return WelcomePage();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: "/",
+      home: FutureBuilder(
+        future: _getInitialScreen(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Scaffold(
+              backgroundColor: Colors.white,
+              body: Center(child: CircularProgressIndicator()),
+            );
+          } else {
+            return snapshot.data!;
+          }
+        },
+      ),
       routes: {
-        "/": (context) => WelcomePage(),
         "/login": (context) => LoginPage(),
         "/register": (context) => RegisterPage(),
-        "/questionnaire-step1": (context) => QuestionnaireStep1(),
         "/home": (context) => HomePage(),
         "/forgot-password": (context) => ForgotPasswordPage(),
         "/reset-password": (context) => ResetPasswordPage(token: ''), // temporal
@@ -51,7 +72,6 @@ class MyApp extends StatelessWidget {
         }
         return null;
       },
-
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -63,5 +83,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
