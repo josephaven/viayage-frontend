@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/curved_background.dart';
 import '../widgets/text_input.dart';
 import '../services/auth_service.dart';
 
@@ -19,7 +20,6 @@ class _LoginPageState extends State<LoginPage> {
 
     if (success) {
       final completed = await AuthService.hasCompletedQuestionnaire();
-
       if (completed) {
         Navigator.pushReplacementNamed(context, "/main");
       } else {
@@ -32,94 +32,158 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Logo
-            Image.asset(
-              'assets/logo.png',
-              height: 100,
-            ),
+      body: Stack(
+        children: [
+          Container(color: Colors.white),
+          const CurvedBackground(),
 
-            SizedBox(height: 40),
+          Center(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24),
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(32),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.25),
+                        offset: Offset(0, 8),
+                        blurRadius: 20,
+                        spreadRadius: 2,
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Image.asset('assets/logo.png', height: 100),
+                      SizedBox(height: 30),
 
-            Container(
-              width: MediaQuery.of(context).size.width * 0.9,
-              padding: EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: Colors.blueGrey[900],
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SizedBox(height: 10),
-
-                  SizedBox(
-                    height: 50,
-                    child: Container(
+                    Container(
+                      height: 55,
+                      margin: EdgeInsets.only(bottom: 20),
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Colors.grey.shade300),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.06),
+                            blurRadius: 6,
+                            offset: Offset(0, 4),
+                          ),
+                        ],
                       ),
-                      child: TextInput(label: "Correo", controller: emailController),
-                    ),
-                  ),
-                  SizedBox(height: 12),
-
-                  SizedBox(
-                    height: 50,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
+                      child: TextInput(
+                        label: "Correo Electrónico",
+                        controller: emailController,
+                        backgroundColor: Colors.transparent,
+                        borderRadius: 0,
                       ),
-                      child: TextInput(label: "Contraseña", controller: passwordController, isPassword: true),
                     ),
-                  ),
-                  SizedBox(height: 25),
 
-                  SizedBox(
-                    width: double.infinity,
-                    height: 55,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFFE0EBF6), // Color del botón
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                      SizedBox(height: 5),
+
+                      Container(
+                        height: 55,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Colors.grey.shade300),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.06),
+                              blurRadius: 6,
+                              offset: Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: TextInput(
+                          label: "Contraseña",
+                          controller: passwordController,
+                          isPassword: true,
+                          backgroundColor: Colors.transparent,
+                          borderRadius: 0,
                         ),
                       ),
-                      onPressed: login,
-                      child: Text(
-                        "Iniciar sesión",
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 4, right: 4),
+                        child: TextButton(
+                          style: TextButton.styleFrom(padding: EdgeInsets.zero),
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/forgot-password");
+                          },
+                          child: Text(
+                            "¿Olvidaste tu contraseña?",
+                            style: TextStyle(
+                              color: Color(0xFF1E2D3F),
+                              fontSize: 13.5,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 15),
 
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, "/forgot-password");
-                    },
-                    child: Text(
-                      "Recuperar contraseña",
-                      style: TextStyle(fontSize: 16, color: Colors.white54),
-                    ),
+                      SizedBox(height: 10),
+
+                      SizedBox(
+                        width: double.infinity,
+                        height: 50,
+                        child: ElevatedButton(
+                          onPressed: login,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xFF1E2D3F),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            elevation: 8,
+                          ),
+                          child: Text(
+                            "Iniciar sesión",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 20),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("¿No tienes una cuenta? "),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(context, "/register");
+                            },
+                            child: Text(
+                              "Regístrate",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF1E2D3F),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
