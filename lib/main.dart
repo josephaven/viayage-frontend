@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:viayage_app/screens/auth_check_screen.dart';
 import 'package:viayage_app/services/auth_service.dart';
-import 'package:viayage_app/views/welcome_page.dart';
 import 'package:viayage_app/views/login_page.dart';
 import 'package:viayage_app/views/register_page.dart';
 import 'package:viayage_app/views/home_page.dart';
@@ -14,44 +14,27 @@ import 'package:viayage_app/views/questionnaire/questionnaire_step3.dart';
 import 'package:viayage_app/views/questionnaire/questionnaire_step4.dart';
 import 'package:viayage_app/views/questionnaire/questionnaire_step5.dart';
 import 'package:viayage_app/views/questionnaire/questionnaire_step6.dart';
+import 'package:viayage_app/widgets/SplashScreen.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  Future<Widget> _getInitialScreen() async {
-    final token = await AuthService.getToken();
-    if (token != null) {
-      final completed = await AuthService.hasCompletedQuestionnaire();
-      return completed ? MainScreen() : QuestionnaireStep1();
-    }
-    return WelcomePage();
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: FutureBuilder(
-        future: _getInitialScreen(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Scaffold(
-              backgroundColor: Colors.white,
-              body: Center(child: CircularProgressIndicator()),
-            );
-          } else {
-            return snapshot.data!;
-          }
-        },
-      ),
+      initialRoute: '/splash',
       routes: {
-        "/login": (context) => LoginPage(),
-        "/register": (context) => RegisterPage(),
-        "/home": (context) => HomePage(),
-        "/forgot-password": (context) => ForgotPasswordPage(),
-        "/reset-password": (context) => ResetPasswordPage(token: ''), // temporal
+        '/splash': (context) => SplashScreen(),
+        '/check-auth': (context) => AuthCheckScreen(),
+        '/login': (context) => LoginPage(),
+        '/register': (context) => RegisterPage(),
+        '/main': (context) => MainScreen(),
+        '/home': (context) => HomePage(),
+        '/forgot-password': (context) => ForgotPasswordPage(),
+        '/reset-password': (context) => ResetPasswordPage(token: ''), // temporal
       },
       onGenerateRoute: (settings) {
         final args = settings.arguments as Map<String, dynamic>?;
@@ -78,7 +61,7 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: [
-        const Locale('es', 'ES'), // Español
+        const Locale('es', 'ES'),
       ],
     );
   }
